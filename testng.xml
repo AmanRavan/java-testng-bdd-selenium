@@ -1,0 +1,20 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="BDD Test Suite" parallel="false">
+    <!-- Define parameters for the test suite -->
+    <parameter name="browser" value="chrome"/>
+
+    <!-- Listeners for reporting and logging -->
+    <listeners>
+        <listener class-name="reports.ExtentReportListener"/>
+    </listeners>
+
+    <!-- Define a test with a name and include the Cucumber test runner class -->
+    <test name="Cucumber Test">
+        <classes>
+            <!-- Specify the fully qualified name of the Cucumber test runner class -->
+            <class name="Runner.CucumberTestRunner"/>
+        </classes>
+    </test>
+</suite>
+
+
