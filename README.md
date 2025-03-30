@@ -19,7 +19,7 @@ This project automates job search scenarios on the Careers website using Seleniu
 
 1. **Clone the repository** (if not already):  
    ```bash
-   git clone AmanRavan/java-testng-bdd-selenium
+   git clone <REPO_URL>
    ```
    Navigate inside the project directory.
 
@@ -40,9 +40,12 @@ To run tests via Maven, execute:
 
 ```bash
 mvn clean test -Dtest=Runner.CucumberTestRunner
+mvn clean test -Dtest=Runner.SmokeTestRunner
+mvn clean test -Dtest=Runner.SanityTestRunner
+mvn clean test -Dtest=Runner.RegressionTestRunner
 ```
 
-- This command will run the Cucumber tests specified by `CucumberTestRunner`.
+- This command will run the Cucumber tests specified by `CucumberTestRunner`. For smoke tests, use `Runner.SmokeTestRunner`. For sanity tests, use `Runner.SanityTestRunner`. For regression tests, use `Runner.RegressionTestRunner`.
 
 ## Reports
 
