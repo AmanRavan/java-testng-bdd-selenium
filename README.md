@@ -19,7 +19,7 @@ This project automates job search scenarios on the Careers website using Seleniu
 
 1. **Clone the repository** (if not already):  
    ```bash
-   git clone <REPO_URL>
+   git clone AmanRavan/java-testng-bdd-selenium
    ```
    Navigate inside the project directory.
 
