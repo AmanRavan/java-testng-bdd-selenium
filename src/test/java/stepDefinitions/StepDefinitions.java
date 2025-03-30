@@ -12,12 +12,13 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.Assert;
 import pages.BasePage;
 import testBase.BaseTest;
 import utils.WaitHelper;
 
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class StepDefinitions extends BaseTest {
 
@@ -68,7 +69,8 @@ public class StepDefinitions extends BaseTest {
         waitHelper.waitForVisibility(heading);
         String actual = heading.getText().trim();
         System.out.println("DEBUG: heading text is: " + actual);
-        Assert.assertTrue(actual.contains(headingText), "Expected heading text to contain: '" + headingText + "', but got: '" + actual + "'");
+        assertThat(actual).contains(headingText)
+                .withFailMessage("Expected heading text to contain: '%s', but got: '%s'", headingText, actual);
         reports.ExtentReportListener.getTest().info("Have successfully navigated to jobs page for professional");
     }
 
@@ -162,14 +164,11 @@ public class StepDefinitions extends BaseTest {
     public void i_should_see_search_results_containing_the_keyword(String keyword){
         List<WebElement> searchResultHighlights = driver.findElements(By.xpath("//div[@class='detail-entry']/h2"));
         waitHelper.waitForVisibility(searchResultHighlights.get(0));
-        boolean keywordFound = false;
-        for (WebElement searchResultHighlight : searchResultHighlights) {
-            if (searchResultHighlight.getText().contains(keyword)) {
-                keywordFound = true;
-                break;
-            }
-        }
-        Assert.assertTrue(keywordFound, "Search results do not contain the keyword: " + keyword);
+        boolean keywordFound = searchResultHighlights.stream()
+                .anyMatch(searchResultHighlight -> searchResultHighlight.getText().contains(keyword));
+        assertThat(keywordFound)
+                .withFailMessage("Search results do not contain the keyword: %s", keyword)
+                .isTrue();
         reports.ExtentReportListener.getTest().info("Have successfully Verified. Search results do not contain the keyword:"+ keyword);
     }
 
